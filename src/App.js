@@ -28,6 +28,8 @@ function TodoList({todos}) {
 }
 
 function AddTodo({ setTodos }) {
+  const inputRef = React.useRef();
+
   function handleAddTodo(event) {
     event.preventDefault(); // This method prevents the default action whenever we submit a form
     const text = event.target.elements.addTodo.value;
@@ -39,11 +41,12 @@ function AddTodo({ setTodos }) {
     setTodos((prevTodos) => {
       return prevTodos.concat(todo);
     });
+    inputRef.current.value = "";
   }
 
   return (
     <form onSubmit={handleAddTodo}>
-      <input name="addTodo" placeholder="Add todo" />
+      <input name="addTodo" placeholder="Add todo" ref={inputRef} />
       <button type="submit">Submit</button>
     </form>
   );

@@ -11,6 +11,7 @@ export default function App() {
     <div>
       <h1>Todo List</h1>
       <TodoList todos={todos} />
+      <AddTodo />
     </div>
   );
 }
@@ -22,5 +23,24 @@ function TodoList({todos}) {
         <li key={todo.id}>{todo.text}</li>
       ))}
     </ul>
+  );
+}
+
+function AddTodo() {
+  function handleAddTodo(event) {
+    event.preventDefault(); // This method prevents the default action whenever we submit a form
+    const text = event.target.elements.addTodo.value;
+    const todo = {
+      id: 4,
+      text,
+      done: false
+    };
+  }
+
+  return (
+    <form onSubmit={handleAddTodo}>
+      <input name="addTodo" placeholder="Add todo" />
+      <button type="submit">Submit</button>
+    </form>
   );
 }

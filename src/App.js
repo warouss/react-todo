@@ -11,17 +11,38 @@ export default function App() {
   return (
     <div>
       <h1>Todo List</h1>
-      <TodoList todos={todos} />
+      <TodoList todos={todos} setTodos={setTodos} />
       <AddTodo setTodos={setTodos} />
     </div>
   );
 }
 
-function TodoList({todos}) {
+function TodoList({todos, setTodos}) {
+  function handleToggleTodo(todo) {
+    // confused by this code? Here's what it says:
+      
+    // if a todo's id is equal to the one we clicked on,
+    // just update that todo's done value to its opposite,
+    // otherwise, do nothing (return it)
+      
+    const updatedTodos = todos.map((t) =>
+      t.id === todo.id
+        ? {
+            ...t,
+            done: !t.done
+          }
+        : t
+    );
+    setTodos(updatedTodos);
+  }
+
   return (
     <ul>
       {todos.map((todo) => (
-        <li key={todo.id}>{todo.text}</li>
+        <li 
+        onClick={() => handleToggleTodo(todo)}
+        style={{textDecoration: todo.done ? 'line-through' : ''}}
+        key={todo.id}>{todo.text}</li>
       ))}
     </ul>
   );

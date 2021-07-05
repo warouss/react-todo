@@ -8,6 +8,12 @@ export default function App() {
     { id: 3, text: "Take shower", done: false }
   ]);
 
+  React.useEffect(() => {
+    console.log('todos : ', todos)
+    console.log('todos size : ', todos.length)
+    document.title = `${todos.length} Todos` 
+  })
+
   return (
     <div>
       <h1>Todo List</h1>
